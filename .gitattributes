@@ -1,0 +1,14 @@
+# Normalise line endings so Windows and Linux contributors cannot fight.
+* text=auto eol=lf
+
+# Preserve CRLF for files Windows tools expect to own.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary assets.
+*.png binary
+*.jpg binary
+*.pdf binary
+*.whl binary
+*.gz binary
