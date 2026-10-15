@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "name": "resnet18-finetuned-cifar10",
+  "version": "1.4.2",
+  "description": "ResNet-18 fine-tuned on CIFAR-10 for teaching transfer learning.",
+  "license": "Apache-2.0",
+  "owner": {
+    "name": "Caden Wate",
+    "contact": "cwate@asu.edu"
+  },
+  "intended_use": "Coursework demonstrations of transfer learning in an undergraduate ML class.",
+  "out_of_scope_use": [
+    "Clinical decision support",
+    "Any autonomous-vehicle perception pipeline"
+  ],
+  "limitations": [
+    "Trained only on 32x32 CIFAR-10 images, so full-resolution photos degrade accuracy.",
+    "Coarse label set: the model confuses cats and dogs in low-light conditions."
+  ],
+  "training_data": {
+    "source": "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz",
+    "license": "unlicensed",
+    "contains_pii": false
+  },
+  "evaluation": {
+    "metrics": ["accuracy", "macro_f1"],
+    "datasets": ["cifar10-test"]
+  },
+  "review": {
+    "due": "2027-01-31",
+    "owner": "cwate@asu.edu"
+  }
+}
