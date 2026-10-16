@@ -1,0 +1,61 @@
+name: Feature or rule proposal
+description: Propose a new rule, flag, or policy option
+title: "feat: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Rule proposals are welcome. A rule is more likely to be accepted when it
+        is objectively checkable, has a clear severity, and fits the existing
+        `MCLxxx` id scheme (ids are never renumbered).
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the real card or CI failure this would have caught.
+    validations:
+      required: true
+
+  - type: textarea
+    id: rule
+    attributes:
+      label: Proposed check
+      description: |
+        What exactly is inspected, and what makes it a violation? Include the
+        field path and a short example of a failing value.
+      placeholder: |
+        Field: evaluation.metrics
+        Violation: the list is empty even though the card is otherwise complete
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Proposed default severity
+      options:
+        - error (the card cannot be relied on)
+        - warning (a smell; opt in via --strict)
+        - info (context only)
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Policy override, existing rule, external tool -- what else could solve this?
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I checked that no existing rule already covers this.
+          required: true
+        - label: The check can be decided without reading the wall clock or the network.
+          required: true
