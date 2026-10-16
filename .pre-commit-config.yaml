@@ -1,0 +1,66 @@
+# Hooks run in this order: cheap and deterministic first, then the type checker,
+# then the project's own dogfooding checks. Revisions are pinned so a hook cannot
+# change under us between two CI runs of the same commit.
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+        args: [--maxkb=512]
+      - id: check-merge-conflict
+      - id: check-toml
+      - id: check-yaml
+      - id: check-json
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.1
+    hooks:
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+      - id: ruff-format
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v2.4.0
+    hooks:
+      - id: mypy
+        additional_dependencies: []
+        args: [--config-file=pyproject.toml]
+
+  # Local hooks: things only this repository can check.
+  - repo: local
+    hooks:
+      - id: commit-lint
+        name: conventional commit message
+        description: Enforce the Conventional Commits convention from CONTRIBUTING.md.
+        entry: python tools/commit_lint.py
+        language: system
+        stages: [commit-msg]
+        always_run: true
+
+      - id: lint-example-manifests
+        name: dogfood - lint the shipped example manifests
+        description: The examples must stay clean, otherwise the README lies.
+        entry: python -m modelcard_lint examples/good-card.json --policy examples/policy.json
+        language: system
+        pass_filenames: false
+        files: ^(examples|src)/
+
+      - id: lint-broken-example-expected-failure
+        name: dogfood - the broken example must fail
+        description: A linter whose bad example passes is not testing anything.
+        entry: python tools/assert_example_fails.py
+        language: system
+        pass_filenames: false
+        files: ^(examples|src)/
+
+      - id: no-todo-without-issue
+        name: no bare TODO markers
+        description: Track work in issues, not in stray comments.
+        entry: python tools/no_bare_todo.py
+        language: system
+        types: [python]
