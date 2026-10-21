@@ -1,4 +1,4 @@
-# Contributing
+﻿# Contributing
 
 Thanks for looking. This document is the contract for changes: follow it and a
 pull request gets merged without a round of process feedback.
@@ -49,7 +49,7 @@ docs/adr-0004-coverage-policy
 ci/cache-pip-downloads
 ```
 
-`main` is protected: no direct pushes, one review, and `ci` must be green. Every
+`main` is protected: no direct pushes, no force pushes, and the single `ci gate` check must pass on an up-to-date branch before a pull request can merge. Every
 change arrives as a merge commit so the review boundary survives in history
 (see [ADR 0003](docs/adr/0003-conventional-commits-and-merge-only-prs.md)).
 
