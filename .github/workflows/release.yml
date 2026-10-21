@@ -2,9 +2,11 @@ name: release
 
 on:
   push:
+    # Tag filters are glob patterns, not regular expressions: "v*" is the whole
+    # set of release tags, and the workflow still asserts that the tag matches
+    # _version.py before it publishes anything.
     tags:
-      - "v[0-9]+.[0-9]+.[0-9]+"
-      - "v[0-9]+.[0-9]+.[0-9]+-*"
+      - "v*"
 
 # Writing a release needs the package contents; everything else stays read-only.
 permissions:
