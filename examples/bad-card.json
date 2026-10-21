@@ -1,0 +1,25 @@
+{
+  "schema_version": 1.0,
+  "name": "fraud-scorer-v3",
+  "version": "v3",
+  "license": "PatentPending-1.0",
+  "owner": {
+    "name": "Risk Team",
+    "contact": "risk-team"
+  },
+  "intended_use": "Score card transactions for fraud.",
+  "limitations": [
+    "new"
+  ],
+  "training_data": {
+    "source": "internal share drive",
+    "contains_pii": true
+  },
+  "evaluation": {
+    "metrics": ["auc"]
+  },
+  "review": {
+    "due": "2025-01-01"
+  },
+  "traning_data_version": "3"
+}

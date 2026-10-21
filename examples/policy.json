@@ -1,0 +1,8 @@
+{
+  "required_metrics": ["accuracy", "macro_f1"],
+  "known_licenses": ["apache-2.0", "mit", "proprietary", "unlicensed"],
+  "severity_overrides": {
+    "MCL009": "error"
+  },
+  "strict": false
+}
