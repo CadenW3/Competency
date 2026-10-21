@@ -1,0 +1,16 @@
+# CODEOWNERS -- review routing.
+# Order matters: the last matching pattern wins, so put the most specific rules
+# at the bottom of the list.
+
+*                                   @CadenW3
+
+# Packaging, CI and release plumbing
+/pyproject.toml                     @CadenW3
+/.github/                           @CadenW3
+/.pre-commit-config.yaml            @CadenW3
+/tools/                             @CadenW3
+
+# The security contract: rules, severity and exit codes are public behaviour.
+/src/modelcard_lint/rules.py        @CadenW3
+/src/modelcard_lint/engine.py       @CadenW3
+/docs/adr/                          @CadenW3

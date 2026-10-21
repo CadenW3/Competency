@@ -1,0 +1,35 @@
+version: 2
+
+updates:
+  # Development dependencies are grouped into one pull request per week so that
+  # the reviewer sees a single diff with a single CI run.
+  - package-ecosystem: pip
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "07:00"
+      timezone: America/Phoenix
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "build"
+      include: scope
+    groups:
+      dev-dependencies:
+        patterns: ["*"]
+    labels:
+      - dependencies
+
+  # Workflow actions are pinned to major tags; keep those majors current.
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "07:00"
+      timezone: America/Phoenix
+    commit-message:
+      prefix: "ci"
+      include: scope
+    labels:
+      - dependencies

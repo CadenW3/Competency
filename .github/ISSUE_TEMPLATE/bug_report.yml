@@ -1,0 +1,76 @@
+name: Bug report
+description: Report a wrong result, a crash, or output that breaks the documented contract
+title: "bug: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. For a security issue, **stop here** and follow
+        [SECURITY.md](../blob/main/SECURITY.md) instead of opening an issue.
+
+  - type: input
+    id: version
+    attributes:
+      label: modelcard-lint version
+      description: Output of `modelcard-lint --version`
+      placeholder: "0.2.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Where did it go wrong?
+      options:
+        - CLI behaviour or exit code
+        - A rule fires when it should not
+        - A rule does not fire when it should
+        - Output format (text / json / github)
+        - Packaging or installation
+        - Documentation
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal manifest that reproduces it
+      description: Paste the smallest JSON model card that shows the problem.
+      render: json
+    validations:
+      required: true
+
+  - type: input
+    id: command
+    attributes:
+      label: Exact command
+      placeholder: "modelcard-lint card.json --policy policy.json"
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+      description: Which exit code did you expect, and why?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+      description: Paste the output. `--format json` is the most useful form.
+      render: console
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS and Python version
+      placeholder: "Windows 11, Python 3.12.10"
+    validations:
+      required: false
